@@ -1,0 +1,251 @@
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+  
+class MyFrame extends JFrame implements ActionListener 
+{ 
+	private static final long serialVersionUID = 1L;
+	
+	// Components of the Form
+    private Container c;
+    private JLabel title;
+    
+    private JLabel name; //name
+    private JTextField tname;
+    private JLabel sur; //surname
+    private JTextField tsur;
+    private JLabel yr; //year of study
+    private JTextField tyr;
+    private JLabel fin; //financing
+    private JRadioButton tax;
+    private JRadioButton budget;
+    private ButtonGroup gengp; //button group
+    
+    private JLabel fac; //faculty
+    private JComboBox f; //list of faculties
+    private JLabel course;
+    private JComboBox co;  //list of courses
+    
+    private JButton sub;
+    private JButton reset;
+    private JTextArea tout;
+    private JLabel res;
+    private JTextArea resadd;
+  
+    
+    private String faculties[]
+            = {"AC","ETTI","ARMM","AU","IE","IMM"};
+    
+    private String crs[]
+            = {"Programming","Maths","Physics","Electronics","Microwaves","Mechanics"};
+ 
+    // constructor, to initialize the components
+    // with default values.
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public MyFrame()
+    {
+        setTitle("Sign Up Form");
+        setBounds(300, 90, 900, 600);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+  
+        c = getContentPane();
+        c.setLayout(null);
+  
+        title = new JLabel("Sign Up Form");
+        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setForeground(Color.blue);
+        title.setSize(300, 30);
+        title.setLocation(300, 30);
+        c.add(title);
+  
+        name = new JLabel("Name");
+        name.setFont(new Font("Arial", Font.PLAIN, 20));
+        name.setSize(100, 20);
+        name.setLocation(100, 100);
+        c.add(name);
+  
+        tname = new JTextField(); //the field to write the name in
+        tname.setFont(new Font("Arial", Font.PLAIN, 15));
+        tname.setSize(190, 20);
+        tname.setLocation(200, 100);
+        c.add(tname);
+  
+        sur = new JLabel("Surname");
+        sur.setFont(new Font("Arial", Font.PLAIN, 20));
+        sur.setSize(100, 20);
+        sur.setLocation(100, 150);
+        c.add(sur);
+  
+        tsur = new JTextField(); //field to write surname in
+        tsur.setFont(new Font("Arial", Font.PLAIN, 15));
+        tsur.setSize(150, 20);
+        tsur.setLocation(200, 150);
+        c.add(tsur);
+        
+        yr = new JLabel("Year of study");
+        yr.setFont(new Font("Arial", Font.PLAIN, 20));
+        yr.setSize(150, 20);
+        yr.setLocation(100, 200);
+        c.add(yr);
+  
+        tyr = new JTextField(); //field to write year of study in
+        tyr.setFont(new Font("Arial", Font.PLAIN, 15));
+        tyr.setSize(80, 20);
+        tyr.setLocation(220, 200);
+        c.add(tyr);
+  
+  
+        fin = new JLabel("Financing");
+        fin.setFont(new Font("Arial", Font.PLAIN, 20));
+        fin.setSize(100, 20);
+        fin.setLocation(100, 255);
+        c.add(fin);
+  
+        tax = new JRadioButton("Tax"); //checkbox
+        tax.setFont(new Font("Arial", Font.PLAIN, 15));
+        tax.setSelected(true);
+        tax.setSize(75, 20);
+        tax.setLocation(200, 255);
+        c.add(tax);
+  
+        budget = new JRadioButton("Budget"); //checkbox
+        budget.setFont(new Font("Arial", Font.PLAIN, 15));
+        budget.setSelected(false);
+        budget.setSize(80, 20);
+        budget.setLocation(275, 255);
+        c.add(budget);
+  
+        gengp = new ButtonGroup(); //creating buttongroup
+        gengp.add(tax);
+        gengp.add(budget);
+  
+        fac = new JLabel("Faculty");
+        fac.setFont(new Font("Arial", Font.PLAIN, 20));
+        fac.setSize(100, 20);
+        fac.setLocation(100, 300);
+        c.add(fac);
+  
+        f = new JComboBox(faculties); //drop down list
+        f.setFont(new Font("Arial", Font.PLAIN, 15));
+        f.setSize(80, 20);
+        f.setLocation(200, 300);
+        c.add(f);
+  
+
+        course = new JLabel("Course");
+        course.setFont(new Font("Arial", Font.PLAIN, 20));
+        course.setSize(100, 20);
+        course.setLocation(100, 350);
+        c.add(course);
+  
+        co = new JComboBox(crs); //drop down list
+        co.setFont(new Font("Arial", Font.PLAIN, 15));
+        co.setSize(95, 20);
+        co.setLocation(200, 350);
+        c.add(co);
+  
+        sub = new JButton("Submit");
+        sub.setFont(new Font("Arial", Font.PLAIN, 15));
+        sub.setForeground(Color.magenta);
+        sub.setSize(100, 20);
+        sub.setLocation(150, 450);
+        sub.addActionListener(this);
+        c.add(sub);
+  
+        reset = new JButton("Reset");
+        reset.setFont(new Font("Arial", Font.PLAIN, 15));
+        reset.setForeground(Color.magenta);
+        reset.setSize(100, 20);
+        reset.setLocation(270, 450);
+        reset.addActionListener(this);
+        c.add(reset);
+  
+        tout = new JTextArea(); //area to print the information
+        tout.setFont(new Font("Arial", Font.PLAIN, 15));
+        tout.setForeground(Color.blue);
+        tout.setSize(300, 400);
+        tout.setLocation(500, 100);
+        tout.setLineWrap(true);
+        tout.setEditable(false);
+        c.add(tout);
+  
+        res = new JLabel("");
+        res.setFont(new Font("Arial", Font.PLAIN, 20));
+        res.setSize(500, 25);
+        res.setLocation(100, 500);
+        c.add(res);
+  
+        resadd = new JTextArea();
+        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
+        resadd.setSize(200, 75);
+        resadd.setLocation(580, 175);
+        resadd.setLineWrap(true);
+        c.add(resadd);
+  
+        setVisible(true);
+    }
+  
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == sub)
+        {
+            
+                String data //name and surname
+                    = "Name : "
+                      + tname.getText() + "\n"
+                      + "Mobile : "
+                      + tsur.getText() + "\n";
+                
+                String data1; //tax or budget
+                if (tax.isSelected())
+                    data1 = "Financing: Tax"
+                            + "\n";
+                else
+                    data1 = "Financing: Budget"
+                            + "\n";
+                
+                String data2 //faculty
+                    = "Faculty : "
+                      + (String)f.getSelectedItem() + "\n";
+  
+                String data3 = "Course : "  //course
+                		+ (String)co.getSelectedItem() + "\n";
+                		 
+                String data4="Year of study" //yr of study
+                			+(String)tyr.getText() + "\n";
+                
+                tout.setText(data + data1 + data2 + data3 + data4); //print all data
+                tout.setEditable(false);
+                res.setText("Registration Successfully..");
+            }
+            else
+            {
+                tout.setText("");
+                resadd.setText("");
+            }
+
+        	if (e.getSource() == reset) //if we press reset button
+	        {
+	            String def = "";
+	            tname.setText(def);
+	            tsur.setText(def);
+	            tyr.setText(def);
+	            res.setText(def);
+	            tout.setText(def);
+	            f.setSelectedIndex(0);
+	            co.setSelectedIndex(0);
+	            resadd.setText(def);
+	        }
+    }
+}
+  
+class Main 
+{
+  
+    public static void main(String[] args) throws Exception
+    {
+        MyFrame frame = new MyFrame();
+    }
+}
